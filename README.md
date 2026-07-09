@@ -10,7 +10,7 @@
 
 **A structured, project-based SQL curriculum built for aspiring Data Analysts — covering fundamentals, joins, window functions, CTEs, query optimization, and real-world business case studies.**
 
-[Overview](#-overview) • [Roadmap](#-learning-roadmap) • [Projects](#-projects--case-studies) • [Datasets](#-datasets) • [Progress](#-progress-tracker) • [Resources](#-resources) • [Connect](#-connect-with-me)
+[Overview](#-overview) • [Roadmap](#-learning-roadmap) • [Projects](#-projects-case-studies) • [Datasets](#-datasets) • [Progress](#-progress-tracker) • [Resources](#-resources) • [Connect](#-connect-with-me)
 
 </div>
 
