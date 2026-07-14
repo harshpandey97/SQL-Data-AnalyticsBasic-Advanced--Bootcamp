@@ -158,7 +158,7 @@ sql-bootcamp-journey/
 
 <div align="center">
 
-BCA graduate transitioning into **Data Analytics / Data Science**, building a portfolio project by project — one query, one dataset, one error fixed at a time.
+ MY NAME IS HARSH PANDEY BCA graduate transitioning into **Data Analytics / Data Science**, building a portfolio project by project — one query, one dataset, one error fixed at a time.
 
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/YOUR-LINKEDIN-HERE)
 [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/harshpandey97)
