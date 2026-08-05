@@ -12,7 +12,7 @@
 
 Welcome to my SQL Mastery repository!
 
-This repository documents my complete SQL learning journey — from database fundamentals through window functions and data type conversion — built while completing a structured Tutedude SQL course (Modules 13–32) using **SQL Server** and **SSMS**.
+This repository documents my complete SQL learning journey — from database fundamentals through window functions and data type conversion — built while completing a structured Tutedude SQL course (Modules 1–15) using **SQL Server** and **SSMS**.
 
 Rather than simply listing "SQL - Intermediate" on my resume, this repository provides proof of learning through:
 
