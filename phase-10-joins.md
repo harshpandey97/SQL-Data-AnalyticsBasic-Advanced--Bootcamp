@@ -1,463 +1,679 @@
-# Phase 9: Conditional Statements (CASE WHEN)
+# Phase 10: SQL JOINS
 
 **Status:** ✅ Complete
-**Source:** Tutedude SQL Course — Module 23 (7m 52s, 1 Lecture)
+**Source:** Tutedude SQL Course — Module 24 (1h 10m, 11 Lectures)
 
 ---
 
 # 🎯 Learning Objectives
 
-In this module, I learned how to use the **CASE** expression in SQL to implement conditional logic within queries. The `CASE` statement works similarly to **IF-ELSE** statements in programming languages and allows data to be categorized, transformed, or labeled based on specified conditions.
+In this module, I learned how to combine data from multiple related tables using **SQL JOINs**. JOINs are among the most important SQL concepts because relational databases store data in separate tables that are connected through keys.
 
-**Topics Covered:**
+After completing this module, I can:
 
-* CASE WHEN
-* Conditional Logic in SELECT
-* Simple CASE
-* Searched CASE
-* CASE with Aggregate Functions
-* CASE in ORDER BY
+* Retrieve data from multiple tables.
+* Understand different types of JOINs.
+* Use Primary Keys and Foreign Keys to relate tables.
+* Write efficient JOIN queries.
+* Solve real-world business problems using relational data.
 
 ---
 
 # 📖 Notes
 
-## What is CASE?
+## What is a JOIN?
 
-The `CASE` expression is used to evaluate one or more conditions and return different values based on the result.
+A **JOIN** combines rows from two or more tables based on a related column.
 
-It allows SQL queries to make decisions without modifying the underlying data.
+Without JOINs, data stored in different tables cannot be viewed together.
 
-### Why Use CASE?
+Example:
 
-* Categorize records.
-* Create business reports.
-* Assign grades or performance levels.
-* Replace coded values with meaningful labels.
-* Generate calculated columns dynamically.
+### Employees
+
+| EmployeeID | EmployeeName | DepartmentID |
+| ---------- | ------------ | -----------: |
+| 101        | Harsh        |            1 |
+| 102        | Amit         |            2 |
+| 103        | Priya        |            1 |
+| 104        | Rahul        |            3 |
+
+### Departments
+
+| DepartmentID | DepartmentName |
+| -----------: | -------------- |
+|            1 | IT             |
+|            2 | HR             |
+|            3 | Finance        |
+
+Using JOIN, SQL combines both tables to produce:
+
+| Employee | Department |
+| -------- | ---------- |
+| Harsh    | IT         |
+| Amit     | HR         |
+| Priya    | IT         |
+| Rahul    | Finance    |
 
 ---
 
-# Types of CASE Statements
+# Why Do We Need JOINs?
 
-There are two types of CASE expressions:
+Relational databases avoid duplicate data.
 
-1. **Simple CASE**
-2. **Searched CASE**
+Instead of storing department names inside every employee record, a separate **Departments** table is created.
+
+JOINs reconnect this related information whenever needed.
+
+Benefits:
+
+* Reduces data redundancy.
+* Improves consistency.
+* Makes databases scalable.
+* Supports complex reporting.
 
 ---
 
-# 1. Simple CASE
+# Types of SQL JOINs
 
-A Simple CASE compares one expression against multiple possible values.
+* INNER JOIN
+* LEFT JOIN
+* RIGHT JOIN
+* FULL OUTER JOIN
+* CROSS JOIN
+* SELF JOIN
+* Multi-table JOIN
 
-## Syntax
+---
+
+# Relationship Diagram
+
+```text
+Employees
+-------------------------
+EmployeeID (PK)
+EmployeeName
+DepartmentID (FK)
+Salary
+
+        │
+        │
+        ▼
+
+Departments
+-------------------------
+DepartmentID (PK)
+DepartmentName
+Location
+```
+
+---
+
+# 1. INNER JOIN
+
+Returns only matching rows from both tables.
+
+### Syntax
 
 ```sql
-SELECT
-CASE expression
-    WHEN value1 THEN result1
-    WHEN value2 THEN result2
-    ELSE default_result
-END AS AliasName
-FROM table_name;
+SELECT columns
+FROM Table1
+INNER JOIN Table2
+ON Table1.Column = Table2.Column;
 ```
 
 ### Example
 
 ```sql
-SELECT EmployeeName,
-       Department,
-       CASE Department
-            WHEN 'IT' THEN 'Technology'
-            WHEN 'HR' THEN 'Human Resources'
-            WHEN 'Finance' THEN 'Accounts'
-            ELSE 'Other Department'
-       END AS DepartmentCategory
-FROM Employees;
+SELECT
+E.EmployeeName,
+D.DepartmentName
+FROM Employees AS E
+INNER JOIN Departments AS D
+ON E.DepartmentID = D.DepartmentID;
 ```
 
 ### Output
 
-| EmployeeName | Department | DepartmentCategory |
-| ------------ | ---------- | ------------------ |
-| Harsh        | IT         | Technology         |
-| Amit         | HR         | Human Resources    |
-| Rahul        | Finance    | Accounts           |
+| Employee | Department |
+| -------- | ---------- |
+| Harsh    | IT         |
+| Amit     | HR         |
+| Priya    | IT         |
+| Rahul    | Finance    |
 
 ---
 
-# 2. Searched CASE
+# INNER JOIN Visualization
 
-A Searched CASE evaluates conditions instead of matching fixed values.
+```text
+Employees      Departments
 
-## Syntax
+     ○────────○
+
+Only matching records
+```
+
+---
+
+# Business Use Cases
+
+* Employee and Department Reports
+* Orders with Customer Details
+* Students with Courses
+* Products with Categories
+
+---
+
+# 2. LEFT JOIN
+
+Returns:
+
+* All rows from the **left table**
+* Matching rows from the right table
+* NULL where no match exists
+
+### Syntax
 
 ```sql
-SELECT
-CASE
-    WHEN condition1 THEN result1
-    WHEN condition2 THEN result2
-    ELSE default_result
-END
-FROM table_name;
+SELECT *
+FROM Employees
+LEFT JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
 ```
 
 ### Example
 
-```sql
-SELECT EmployeeName,
-       Salary,
-       CASE
-            WHEN Salary >= 70000 THEN 'High Salary'
-            WHEN Salary >= 50000 THEN 'Medium Salary'
-            ELSE 'Low Salary'
-       END AS SalaryCategory
-FROM Employees;
-```
+If an employee belongs to a department that doesn't exist:
 
-### Output
-
-| EmployeeName | Salary | SalaryCategory |
-| ------------ | -----: | -------------- |
-| Harsh        |  50000 | Medium Salary  |
-| Amit         |  45000 | Low Salary     |
-| Priya        |  75000 | High Salary    |
+| Employee | Department |
+| -------- | ---------- |
+| Harsh    | IT         |
+| Amit     | HR         |
+| Rohit    | NULL       |
 
 ---
 
-# CASE with Multiple Conditions
+# LEFT JOIN Visualization
 
-Multiple conditions are evaluated from top to bottom.
-
-The first condition that evaluates to **TRUE** is returned.
-
-```sql
-SELECT EmployeeName,
-       Experience,
-       CASE
-            WHEN Experience >= 10 THEN 'Senior'
-            WHEN Experience >= 5 THEN 'Mid-Level'
-            ELSE 'Junior'
-       END AS EmployeeLevel
-FROM Employees;
+```text
+████████ Left Table
+██████ Matching
 ```
+
+Everything from the left table is returned.
 
 ---
 
-# CASE with Aggregate Functions
+# Business Use Cases
 
-CASE expressions can be combined with aggregate functions for business reporting.
+* Show all customers, even if they have no orders.
+* Show all employees, even if no department exists.
+* Product inventory reports.
+
+---
+
+# 3. RIGHT JOIN
+
+Returns:
+
+* All rows from the right table
+* Matching rows from the left table
+
+### Syntax
+
+```sql
+SELECT *
+FROM Employees
+RIGHT JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+```
+
+---
 
 ### Example
 
-Count employees earning more than ₹50,000.
+Departments with no employees still appear.
+
+| Employee | Department |
+| -------- | ---------- |
+| Harsh    | IT         |
+| NULL     | Marketing  |
+
+---
+
+# RIGHT JOIN Visualization
+
+```text
+Matching ██████
+Right Table ███████████
+```
+
+---
+
+# Business Use Cases
+
+* List every department.
+* Display all product categories.
+* Show all available courses.
+
+---
+
+# 4. FULL OUTER JOIN
+
+Returns
+
+* Every row from the left table
+* Every row from the right table
+* Matching rows merged together
+
+### Syntax
+
+```sql
+SELECT *
+FROM Employees
+FULL OUTER JOIN Departments
+ON Employees.DepartmentID=Departments.DepartmentID;
+```
+
+---
+
+### Example
+
+| Employee | Department |
+| -------- | ---------- |
+| Harsh    | IT         |
+| Amit     | HR         |
+| NULL     | Marketing  |
+| Rohit    | NULL       |
+
+---
+
+# FULL JOIN Visualization
+
+```text
+████ Left
+████████████ Combined
+████ Right
+```
+
+---
+
+# Business Use Cases
+
+* Data reconciliation
+* Comparing two databases
+* Finding missing records
+
+---
+
+# 5. CROSS JOIN
+
+Returns the Cartesian Product.
+
+Every row from Table A combines with every row from Table B.
+
+### Syntax
+
+```sql
+SELECT *
+FROM Employees
+CROSS JOIN Departments;
+```
+
+If
+
+Employees = 5 rows
+
+Departments = 3 rows
+
+Output = **15 rows**
+
+---
+
+# CROSS JOIN Visualization
+
+```text
+5 × 3 = 15 Rows
+```
+
+---
+
+# Business Use Cases
+
+* Product combinations
+* Schedule generation
+* Seating arrangements
+* Test data creation
+
+---
+
+# 6. SELF JOIN
+
+A table joins with itself.
+
+Useful when rows inside the same table are related.
+
+Example:
+
+Employees
+
+| Employee | ManagerID |
+| -------- | --------- |
+| Harsh    | 2         |
+| Amit     | NULL      |
+| Rahul    | 2         |
 
 ```sql
 SELECT
-SUM(
-CASE
-    WHEN Salary > 50000 THEN 1
-    ELSE 0
-END
-) AS HighSalaryEmployees
-FROM Employees;
+E.EmployeeName,
+M.EmployeeName AS Manager
+FROM Employees E
+LEFT JOIN Employees M
+ON E.ManagerID=M.EmployeeID;
 ```
+
+Output
+
+| Employee | Manager |
+| -------- | ------- |
+| Harsh    | Amit    |
+| Rahul    | Amit    |
 
 ---
 
-# CASE with GROUP BY
+# Business Use Cases
+
+* Employee → Manager
+* Parent → Child
+* Category → Parent Category
+* Referral Systems
+
+---
+
+# 7. Multi-table JOIN
+
+Multiple JOINs can combine three or more tables.
+
+Example
+
+Employees
+
+↓
+
+Departments
+
+↓
+
+Locations
 
 ```sql
 SELECT
-CASE
-    WHEN Salary >= 60000 THEN 'Senior Salary'
-    ELSE 'Regular Salary'
-END AS SalaryGroup,
-COUNT(*) AS TotalEmployees
-FROM Employees
-GROUP BY
-CASE
-    WHEN Salary >= 60000 THEN 'Senior Salary'
-    ELSE 'Regular Salary'
-END;
+E.EmployeeName,
+D.DepartmentName,
+L.City
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID=D.DepartmentID
+INNER JOIN Locations L
+ON D.LocationID=L.LocationID;
 ```
 
 ---
 
-# CASE in ORDER BY
+# JOIN Execution Order
 
-CASE can also control custom sorting.
+SQL processes JOINs in this order:
 
-```sql
-SELECT EmployeeName,
-       Department
-FROM Employees
-ORDER BY
-CASE
-    WHEN Department='IT' THEN 1
-    WHEN Department='Finance' THEN 2
-    WHEN Department='HR' THEN 3
-    ELSE 4
-END;
-```
-
-This sorts departments in a custom order instead of alphabetical order.
+1. FROM
+2. JOIN
+3. ON
+4. WHERE
+5. GROUP BY
+6. HAVING
+7. SELECT
+8. ORDER BY
 
 ---
 
-# Real-World Business Use Cases
+# Choosing the Right JOIN
 
-## Employee Performance
-
-```sql
-CASE
-WHEN PerformanceScore >= 90 THEN 'Excellent'
-WHEN PerformanceScore >= 75 THEN 'Good'
-ELSE 'Needs Improvement'
-END
-```
-
----
-
-## Student Grades
-
-```sql
-CASE
-WHEN Marks >= 90 THEN 'A'
-WHEN Marks >= 80 THEN 'B'
-WHEN Marks >= 70 THEN 'C'
-ELSE 'Fail'
-END
-```
-
----
-
-## Sales Category
-
-```sql
-CASE
-WHEN SalesAmount >= 100000 THEN 'High Sales'
-WHEN SalesAmount >= 50000 THEN 'Medium Sales'
-ELSE 'Low Sales'
-END
-```
-
----
-
-## Customer Type
-
-```sql
-CASE
-WHEN TotalPurchase >= 500000 THEN 'Premium Customer'
-ELSE 'Regular Customer'
-END
-```
-
----
-
-# Best Practices
-
-* Always include an `ELSE` clause to handle unmatched conditions.
-* Arrange conditions from most specific to least specific.
-* Use meaningful aliases for calculated columns.
-* Keep CASE expressions simple and readable.
-* Avoid deeply nested CASE statements unless necessary.
+| JOIN       | Returns                     |
+| ---------- | --------------------------- |
+| INNER      | Matching rows only          |
+| LEFT       | All left + matching right   |
+| RIGHT      | All right + matching left   |
+| FULL OUTER | All rows from both tables   |
+| CROSS      | Every possible combination  |
+| SELF       | Same table joined to itself |
 
 ---
 
 # 💻 Query Examples
 
-## Categorize Salary
-
-```sql
-SELECT EmployeeName,
-       Salary,
-       CASE
-           WHEN Salary >= 70000 THEN 'High'
-           WHEN Salary >= 50000 THEN 'Medium'
-           ELSE 'Low'
-       END AS SalaryCategory
-FROM Employees;
-```
-
----
-
-## Employee Grade
-
-```sql
-SELECT EmployeeName,
-       PerformanceScore,
-       CASE
-           WHEN PerformanceScore >= 90 THEN 'A'
-           WHEN PerformanceScore >= 75 THEN 'B'
-           WHEN PerformanceScore >= 60 THEN 'C'
-           ELSE 'Fail'
-       END AS Grade
-FROM Employees;
-```
-
----
-
-## Department Display Name
-
-```sql
-SELECT EmployeeName,
-       Department,
-       CASE Department
-           WHEN 'IT' THEN 'Technology'
-           WHEN 'HR' THEN 'Human Resources'
-           WHEN 'Finance' THEN 'Accounts'
-           ELSE 'Other'
-       END AS DepartmentName
-FROM Employees;
-```
-
----
-
-## Count High Salary Employees
+## 1. INNER JOIN
 
 ```sql
 SELECT
-SUM(
-CASE
-WHEN Salary > 50000 THEN 1
-ELSE 0
-END
-) AS HighSalaryEmployees
-FROM Employees;
+E.EmployeeName,
+D.DepartmentName
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID=D.DepartmentID;
 ```
 
 ---
 
-## Custom Sorting
+## 2. LEFT JOIN
 
 ```sql
-SELECT EmployeeName,
-       Department
+SELECT *
+FROM Employees E
+LEFT JOIN Departments D
+ON E.DepartmentID=D.DepartmentID;
+```
+
+---
+
+## 3. RIGHT JOIN
+
+```sql
+SELECT *
+FROM Employees E
+RIGHT JOIN Departments D
+ON E.DepartmentID=D.DepartmentID;
+```
+
+---
+
+## 4. FULL OUTER JOIN
+
+```sql
+SELECT *
+FROM Employees E
+FULL OUTER JOIN Departments D
+ON E.DepartmentID=D.DepartmentID;
+```
+
+---
+
+## 5. CROSS JOIN
+
+```sql
+SELECT *
 FROM Employees
-ORDER BY
-CASE
-WHEN Department='IT' THEN 1
-WHEN Department='Finance' THEN 2
-WHEN Department='HR' THEN 3
-ELSE 4
-END;
+CROSS JOIN Departments;
 ```
 
 ---
 
-## Employee Experience Category
+## 6. SELF JOIN
 
 ```sql
-SELECT EmployeeName,
-       Experience,
-       CASE
-           WHEN Experience >= 10 THEN 'Senior'
-           WHEN Experience >= 5 THEN 'Mid-Level'
-           ELSE 'Junior'
-       END AS ExperienceLevel
-FROM Employees;
+SELECT
+E.EmployeeName,
+M.EmployeeName AS Manager
+FROM Employees E
+LEFT JOIN Employees M
+ON E.ManagerID=M.EmployeeID;
+```
+
+---
+
+## 7. Employees with Salary and Department
+
+```sql
+SELECT
+E.EmployeeName,
+E.Salary,
+D.DepartmentName
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID=D.DepartmentID;
+```
+
+---
+
+## 8. Department-wise Employee Count
+
+```sql
+SELECT
+D.DepartmentName,
+COUNT(E.EmployeeID) AS EmployeeCount
+FROM Departments D
+LEFT JOIN Employees E
+ON D.DepartmentID=E.DepartmentID
+GROUP BY D.DepartmentName;
+```
+
+---
+
+## 9. Employees Working in IT
+
+```sql
+SELECT
+E.EmployeeName
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID=D.DepartmentID
+WHERE D.DepartmentName='IT';
+```
+
+---
+
+## 10. Three-Table JOIN
+
+```sql
+SELECT
+E.EmployeeName,
+D.DepartmentName,
+L.City
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID=D.DepartmentID
+INNER JOIN Locations L
+ON D.LocationID=L.LocationID;
 ```
 
 ---
 
 # ⚠️ Common Mistakes (Gotchas)
 
-* Forgetting the `END` keyword.
-* Omitting the `ELSE` clause, which may return `NULL` for unmatched conditions.
-* Writing overlapping conditions in the wrong order.
-* Confusing Simple CASE with Searched CASE.
-* Creating overly complex nested CASE statements that reduce readability.
+* Forgetting the `ON` condition, leading to unintended Cartesian products.
+* Joining on incorrect columns.
+* Confusing `LEFT JOIN` with `RIGHT JOIN`.
+* Using `INNER JOIN` when unmatched records are also required.
+* Selecting ambiguous column names without table aliases.
+* Ignoring `NULL` values returned by outer joins.
+
+---
+
+# 💼 Real-World Business Scenarios
+
+| Scenario                                      | JOIN Used        |
+| --------------------------------------------- | ---------------- |
+| Employees with Departments                    | INNER JOIN       |
+| Customers without Orders                      | LEFT JOIN        |
+| All Departments including Empty Ones          | RIGHT JOIN       |
+| Data Reconciliation                           | FULL OUTER JOIN  |
+| Product Variants                              | CROSS JOIN       |
+| Employee–Manager Hierarchy                    | SELF JOIN        |
+| Sales Dashboard (Orders, Customers, Products) | Multi-table JOIN |
 
 ---
 
 # 🧠 Interview Questions
 
-### What is the CASE statement in SQL?
+### What is a JOIN?
 
-The `CASE` expression adds conditional logic to SQL queries, allowing different values to be returned based on specified conditions.
-
----
-
-### What is the difference between Simple CASE and Searched CASE?
-
-| Simple CASE                                | Searched CASE                          |
-| ------------------------------------------ | -------------------------------------- |
-| Compares one expression to multiple values | Evaluates multiple conditions          |
-| Uses `CASE column`                         | Uses `CASE WHEN condition`             |
-| Best for exact value matching              | Best for ranges and logical conditions |
+A JOIN combines related data from two or more tables using a common column.
 
 ---
 
-### Can CASE be used with aggregate functions?
+### What is the difference between INNER JOIN and LEFT JOIN?
 
-Yes. It is commonly combined with functions such as `COUNT()`, `SUM()`, and `AVG()` to perform conditional aggregation.
-
-Example:
-
-```sql
-SELECT
-SUM(
-CASE
-WHEN Salary > 50000 THEN 1
-ELSE 0
-END
-)
-FROM Employees;
-```
+| INNER JOIN                 | LEFT JOIN                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------- |
+| Returns only matching rows | Returns all rows from the left table plus matching rows from the right table |
 
 ---
 
-### Can CASE be used in ORDER BY?
+### When would you use a SELF JOIN?
 
-Yes. It allows custom sorting logic instead of the default alphabetical or numerical order.
+When a table has a relationship with itself, such as employees and their managers.
 
 ---
 
-### What happens if no condition matches?
+### What is a CROSS JOIN?
 
-If an `ELSE` clause is provided, its value is returned. Otherwise, SQL returns `NULL`.
+A CROSS JOIN returns the Cartesian product, combining every row of one table with every row of another.
+
+---
+
+### Which JOIN is most commonly used?
+
+**INNER JOIN** is the most frequently used because it returns only matching records and is ideal for most reporting and analytical queries.
 
 ---
 
 # 🔑 Key Takeaways
 
-* Learned how to use the `CASE` expression for conditional logic.
-* Distinguished between Simple CASE and Searched CASE.
-* Categorized records dynamically using business rules.
-* Combined CASE with aggregate functions for reporting.
-* Applied CASE in `ORDER BY` for custom sorting.
-* Followed best practices to write clean, readable conditional SQL.
+* Learned how relational tables are connected using JOINs.
+* Used **INNER**, **LEFT**, **RIGHT**, **FULL OUTER**, **SELF**, and **CROSS** JOINs.
+* Built queries involving multiple tables.
+* Understood JOIN execution order.
+* Applied JOINs to solve real-world business problems.
+* Followed best practices for writing readable and efficient JOIN queries.
 
 ---
 
 # 📚 Summary
 
-| Topic                         | Covered |
-| ----------------------------- | ------- |
-| CASE WHEN                     | ✅       |
-| Simple CASE                   | ✅       |
-| Searched CASE                 | ✅       |
-| Conditional Logic             | ✅       |
-| CASE with Aggregate Functions | ✅       |
-| CASE with GROUP BY            | ✅       |
-| CASE in ORDER BY              | ✅       |
-| Business Use Cases            | ✅       |
-| Best Practices                | ✅       |
+| Topic              | Covered |
+| ------------------ | ------- |
+| INNER JOIN         | ✅       |
+| LEFT JOIN          | ✅       |
+| RIGHT JOIN         | ✅       |
+| FULL OUTER JOIN    | ✅       |
+| CROSS JOIN         | ✅       |
+| SELF JOIN          | ✅       |
+| Multi-table JOIN   | ✅       |
+| JOIN Execution     | ✅       |
+| Business Scenarios | ✅       |
+| Best Practices     | ✅       |
 
 ---
 
 # 🔗 Resources
 
-* 📘 Tutedude SQL Course — Module 23 (7m 52s, 1 Lecture)
-* 📖 Microsoft SQL Server Documentation – CASE Expression
-* 📖 SQLBolt – CASE Statements
-* 📖 W3Schools SQL CASE
-* 📖 PostgreSQL Documentation
-* 📖 MySQL Documentation
+* 📘 Tutedude SQL Course — Module 24 (1h 10m, 11 Lectures)
+* 📖 Microsoft SQL Server Documentation – JOIN Fundamentals
+* 📖 SQLBolt – SQL Joins
+* 📖 W3Schools SQL JOIN Tutorial
+* 📖 PostgreSQL Documentation – Table Expressions
+* 📖 MySQL Documentation – JOIN Syntax
 
 ---
 
-> **Completion Status:** ✅ Phase 9 Completed Successfully
-> **Next Phase:** SQL **JOINS** – Combining data from multiple tables using INNER, LEFT, RIGHT, FULL OUTER, SELF, and CROSS JOIN.
+> **Completion Status:** ✅ Phase 10 Completed Successfully
+> **Next Phase:** **Subqueries** – Writing nested SQL queries for advanced filtering, reporting, and analysis.
