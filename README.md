@@ -1,141 +1,235 @@
-# 📊 Data Analytics Bootcamp — Learning Journey
+<div align="center">
 
-Tracking my progress through a complete Data Analytics bootcamp covering **Excel → SQL → Python → Power BI**, from fundamentals to advanced, real-world projects.
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=CC2927&center=true&vCenter=true&width=600&lines=SQL+Mastery+%F0%9F%97%84%EF%B8%8F;Basics+to+Advanced;18%2F18+Phases+Complete+%E2%9C%85;Modules+13+%E2%80%93+32+%7C+Tutedude+SQL+Course)](https://git.io/typing-svg)
 
-<p align="left">
-  <a href="https://www.linkedin.com/in/harsh-pandey-395a10237">
-    <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin" alt="LinkedIn"/>
-  </a>
-  <a href="mailto:harshpandey6012@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail" alt="Email"/>
-  </a>
-  <a href="https://github.com/harshpandey97">
-    <img src="https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github" alt="GitHub"/>
-  </a>
-</p>
+![GitHub last commit](https://img.shields.io/github/last-commit/harshpandey97/SQL-Mastery) ![GitHub repo size](https://img.shields.io/github/repo-size/harshpandey97/SQL-Mastery) ![GitHub stars](https://img.shields.io/github/stars/harshpandey97/SQL-Mastery) ![GitHub forks](https://img.shields.io/github/forks/harshpandey97/SQL-Mastery)
 
----
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen) ![Tool](https://img.shields.io/badge/Tool-SQL%20Server-CC2927) ![Level](https://img.shields.io/badge/Level-Beginner%20to%20Advanced-blue) ![Portfolio](https://img.shields.io/badge/Portfolio-Ready-orange)
 
-## 🧭 About This Repository
+</div>
 
-This repo documents my hands-on progress through a structured bootcamp — module notes, assignment solutions, and SQL/Python scripts — as I build toward a Data Analyst role.
+## 🌟 About This Repository
 
----
+Welcome to my SQL Mastery repository!
 
-## 📌 Progress Tracker
+This repository documents my complete SQL learning journey — from database fundamentals through window functions and data type conversion — built while completing a structured Tutedude SQL course (Modules 13–32) using **SQL Server** and **SSMS**.
 
-### ✅ Completed Modules
+Rather than simply listing "SQL - Intermediate" on my resume, this repository provides proof of learning through:
 
-| Module | Topic | Duration | Lectures |
-|---|---|---|---|
-| 13 | SQL Introduction | 12m | 1/1 ✅ |
-| 14 | Installation & Getting Started | 4m 52s | 1/1 ✅ |
-| 15 | Database Basics | 18m 32s | 3/3 ✅ |
-| 16 | Fundamental SQL Statements | 2h 15m | 12/12 ✅ |
-| 17 | Restore and Backup | 29m 25s | 3/3 ✅ |
-| 18 | Selection Commands: Filtering | 26m 56s | 3/3 ✅ |
-| 19 | Selection Commands: Ordering | 18m 40s | 3/3 ✅ |
-| 20 | Aliasing | 5m 17s | 1/1 ✅ |
-| 21 | Aggregate Commands | 23m 48s | 4/4 ✅ |
-| 22 | GROUP BY | 20m 1s | 2/2 ✅ |
-| 23 | Conditional Statements | 7m 52s | 1/1 ✅ |
-| 24 | JOINS | 1h 10m | 11/11 ✅ |
-| 25 | Subqueries | 20m 21s | 3/3 ✅ |
-| 26 | Views and Indexes | 20m 3s | 2/2 ✅ |
-| 27 | String Functions | 31m 17s | 7/7 ✅ |
-| 28 | Mathematical Functions | 22m 53s | 4/4 ✅ |
-| 29 | Date/Time Functions | 15m 39s | 3/3 ✅ |
+- 📖 Structured Notes per Module/Phase
+- 💻 Hands-on Query Examples
+- 🏅 Completed Course Assignments (4–10)
+- 🧩 Business-style Mini Challenges
+- 📊 End-to-end Capstone Projects
 
-### 🔄 In Progress
+## 🎯 Repository Goals
 
-| Module | Topic | Duration | Lectures |
-|---|---|---|---|
-| 30 | Pattern (String) Matching | 24m 33s | 1/3 🔄 |
+- ✔ Master SQL from Fundamentals to Advanced Query Techniques
+- ✔ Cover Joins, Subqueries, Views, Indexes, and Window Functions in depth
+- ✔ Build Confidence with Data Type Conversion & Safe Data Handling
+- ✔ Practice Business-style Data Analysis with SQL
+- ✔ Prepare for Data Analyst / BI Analyst / AI Analyst Interviews
+- ✔ Build a Professional SQL Portfolio
 
-### ⏳ Pending
+## 🗂 Repository Structure
 
-| Module | Topic | Duration | Lectures |
-|---|---|---|---|
-| 31 | Window Functions | 1h 27m | 0/10 |
-| 32 | Data Type Conversion Functions | — | — |
-
-### 📝 Assignments
-
-| Assignment | Topic | Status |
-|---|---|---|
-| Assignment 4 | Fundamental SQL Statements | ✅ Shared / Reward Unlocked |
-| Assignment 5 | Selection Commands: Filtering & Ordering | ⏳ Pending |
-| Assignment 6 | GROUP BY & Conditional Statements | ⏳ Pending |
-| Assignment 7 | Joins | ⏳ Pending |
-| Assignment 8 | Subqueries & Views | ⏳ Pending |
-| Assignment 9 | Date and Time Functions | ⏳ Pending |
-| Assignment 10 | Pattern (String) Matching | ⏳ Pending |
-
----
-
-## 🛠 Tech Stack So Far
-
-![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white)
-![Excel](https://img.shields.io/badge/Excel-217346?style=flat-square&logo=microsoftexcel&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black)
-
----
-
-## 📂 Repository Structure
-
-```text
-.
-├── sql/
-│   ├── module16_fundamental_statements.sql
-│   ├── module18_filtering.sql
-│   ├── module19_ordering.sql
-│   ├── module21_aggregates.sql
-│   ├── module22_groupby.sql
-│   ├── module24_joins.sql
-│   ├── module25_subqueries.sql
-│   ├── module27_string_functions.sql
-│   ├── module28_math_functions.sql
-│   ├── module29_datetime_functions.sql
-│   └── module30_pattern_matching.sql
+```
+SQL-Mastery
 │
-├── assignments/
-│   ├── Assignment4_FundamentalSQL/
-│   ├── Assignment5_FilteringOrdering/
-│   ├── Assignment6_GroupByConditional/
-│   ├── Assignment7_Joins/
-│   ├── Assignment8_SubqueriesViews/
-│   ├── Assignment9_DateTime/
-│   └── Assignment10_PatternMatching/
+├── 📁 notes
+│   ├── phase-01-sql-intro-setup.md
+│   ├── phase-02-fundamental-statements.md
+│   ├── ... (18 phases, Modules 13–32)
 │
-├── notes/
-│   └── module_summaries.md
+├── 📁 practice
+│   ├── phase-01-sql-intro-setup-practice.md
+│   ├── ... (18 phases)
+│   └── 📁 assignments
+│       └── README.md          # Assignments 4–10 tracker
 │
-└── README.md
+├── 📁 projects
+│   └── README.md               # mini & capstone project ideas
+│
+├── README.md
+└── LICENSE
 ```
 
----
+## 🚀 Learning Roadmap
 
-## 🎯 Current Focus
+| Phase | Topics Covered | Source Module(s) | Lectures | Status |
+|---|---|---|---|---|
+| Phase 1 | SQL Introduction & Getting Started | Mod 13–15 | 1+1+3 | ✅ Complete |
+| Phase 2 | Fundamental SQL Statements | Mod 16 | 12/12 | ✅ Complete |
+| Phase 3 | Backup & Restore | Mod 17 | 3/3 | ✅ Complete |
+| Phase 4 | Selection Commands: Filtering | Mod 18 | 3/3 | ✅ Complete |
+| Phase 5 | Selection Commands: Ordering | Mod 19 | 3/3 | ✅ Complete |
+| Phase 6 | Aliasing | Mod 20 | 1/1 | ✅ Complete |
+| Phase 7 | Aggregate Commands | Mod 21 | 4/4 | ✅ Complete |
+| Phase 8 | GROUP BY | Mod 22 | 2/2 | ✅ Complete |
+| Phase 9 | Conditional Statements | Mod 23 | 1/1 | ✅ Complete |
+| Phase 10 | JOINS | Mod 24 | 11/11 | ✅ Complete |
+| Phase 11 | Subqueries | Mod 25 | 3/3 | ✅ Complete |
+| Phase 12 | Views and Indexes | Mod 26 | 2/2 | ✅ Complete |
+| Phase 13 | String Functions | Mod 27 | 7/7 | ✅ Complete |
+| Phase 14 | Mathematical Functions | Mod 28 | 4/4 | ✅ Complete |
+| Phase 15 | DATE TIME Functions | Mod 29 | 3/3 | ✅ Complete |
+| Phase 16 | Pattern (String) Matching | Mod 30 | 3/3 | ✅ Complete |
+| Phase 17 | Window Functions | Mod 31 | 10/10 | ✅ Complete |
+| Phase 18 | Data Type Conversion Functions | Mod 32 | 1/1 | ✅ Complete |
 
-Working through **Module 30 — Pattern Matching (LIKE, wildcards, advanced patterns)**, then moving into **Window Functions** — one of the most important topics for analytical SQL (ranking, running totals, partitions).
+**🎉 18 of 18 phases complete — course finished end-to-end.**
 
----
+## 📚 Learning Modules
 
-## 📈 Overall Progress
+### 📌 Phase 1 — SQL Introduction & Getting Started ✅
+RDBMS concepts, installation, database basics
 
-`Modules 13–29 Complete` → `Module 30 In Progress` → `Modules 31–32 Upcoming`
+### 📌 Phase 2 — Fundamental SQL Statements ✅
+CREATE, INSERT, UPDATE, DELETE, SELECT, constraints
 
-**Estimated completion:** ~90% of the SQL portion of the bootcamp done.
+### 📌 Phase 3 — Backup & Restore ✅
+Backing up and restoring a database, `.bak` files
 
----
+### 📌 Phase 4 — Selection Commands: Filtering ✅
+WHERE, comparison/logical operators, BETWEEN, IN, LIKE, IS NULL
+
+### 📌 Phase 5 — Selection Commands: Ordering ✅
+ORDER BY, ASC/DESC, multi-column sorting
+
+### 📌 Phase 6 — Aliasing ✅
+Column and table aliases (AS)
+
+### 📌 Phase 7 — Aggregate Commands ✅
+COUNT, SUM, AVG, MIN, MAX
+
+### 📌 Phase 8 — GROUP BY ✅
+Grouping with aggregates, HAVING vs WHERE
+
+### 📌 Phase 9 — Conditional Statements ✅
+CASE WHEN and conditional logic in SELECT
+
+### 📌 Phase 10 — JOINS ✅
+INNER, LEFT, RIGHT, FULL OUTER, SELF, CROSS JOIN
+
+### 📌 Phase 11 — Subqueries ✅
+Scalar and correlated subqueries
+
+### 📌 Phase 12 — Views and Indexes ✅
+Creating views, clustered vs non-clustered indexes
+
+### 📌 Phase 13 — String Functions ✅
+CONCAT, SUBSTRING, LEN, TRIM, REPLACE, and more
+
+### 📌 Phase 14 — Mathematical Functions ✅
+CEIL, FLOOR, RANDOM, ROUND, POWER
+
+### 📌 Phase 15 — DATE TIME Functions ✅
+Date/time extraction, arithmetic, formatting basics
+
+### 📌 Phase 16 — Pattern (String) Matching ✅
+LIKE with wildcards (`%`, `_`)
+
+### 📌 Phase 17 — Window Functions ✅
+ROW_NUMBER, RANK, DENSE_RANK, LAG/LEAD, OVER() + PARTITION BY
+
+### 📌 Phase 18 — Data Type Conversion Functions ✅
+CAST vs CONVERT vs FORMAT, TRY_CAST/TRY_CONVERT, number/date ↔ string conversion
+
+## 🏅 Course Assignments
+
+All 7 checkpoint assignments completed and claimed (4 through 10) — see `practice/assignments/README.md` for the full unlock map.
+
+## 💼 Business Use Cases
+
+This repository works toward solving practical business problems including:
+
+- 📈 Sales & Revenue Analysis
+- 👨‍💼 HR & Employee Analytics
+- 📦 Inventory Management
+- 📊 KPI Reporting for BI Tools
+- 📉 Trend & Ranking Analysis (Window Functions)
+- 🧹 Data Cleaning & Safe Type Conversion for Messy Source Data
+
+## 🧠 Skills Demonstrated
+
+**Core SQL**
+- DDL/DML, Filtering, Ordering, Aliasing, Joins, Subqueries
+
+**Analytical SQL**
+- Aggregates, GROUP BY/HAVING, CASE Logic, Window Functions
+
+**Database Engineering**
+- Views, Indexes, Backup/Restore
+
+**Applied Functions**
+- String, Mathematical, Date/Time, Pattern Matching, Data Type Conversion
+
+## 🏆 Portfolio Value
+
+This repository demonstrates:
+
+- ✅ Practical SQL Skills Across the Full Stack (Basic → Advanced)
+- ✅ Structured, Course-Verified Learning (Modules 13–32, Assignments 4–10)
+- ✅ Query Writing Across Filtering, Joins, Aggregation, and Window Functions
+- ✅ Business Problem-Solving with Data
+- ✅ Documentation Discipline
+- ✅ Completed, End-to-End Learning Journey
+
+## 📊 Repository Progress
+
+```
+████████████████████████████████████
+
+Progress : 100% — All 18 Phases Complete ✅
+```
+
+## 🛠 Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| SQL Server | Database Engine |
+| SSMS | Query & Schema Management |
+| Git | Version Control |
+| GitHub | Portfolio |
+| Markdown | Documentation |
+
+## 📂 Future Improvements
+
+- [ ] Schema Diagrams (ERDs) per Project
+- [ ] Execution Plan Screenshots for Optimization Case Studies
+- [ ] Interview Question Bank
+- [ ] SQL Cheat Sheet
+- [ ] Integration with Power BI Bootcamp Repo (SQL → BI pipeline demo)
+- [ ] Timed Query-writing Challenges
+
+## ⭐ Why This Repository?
+
+Many resumes simply state:
+
+> SQL - Intermediate
+
+This repository proves it.
+
+Instead of claiming skills, it demonstrates:
+
+- Real Practice
+- Real Documentation
+- Real Assignments Completed
+- Real Business Problems Solved
+
+This approach gives recruiters tangible evidence of SQL proficiency — from fundamentals through window functions and safe data type handling.
 
 ## 📬 Connect With Me
 
-- 💼 **LinkedIn:** [harsh-pandey-395a10237](https://www.linkedin.com/in/harsh-pandey-395a10237)
-- 📧 **Email:** harshpandey6012@gmail.com
-- 💻 **GitHub:** [harshpandey97](https://github.com/harshpandey97)
+<div align="center">
 
----
+**Harsh Pandey**
+💼 Aspiring Data Analyst | BI Analyst
 
-*This repository is updated as I progress through the bootcamp. Feel free to explore the SQL scripts and assignment solutions, and reach out if you'd like to connect or collaborate!*
+📧 harshpandey6012@gmail.com &nbsp;|&nbsp; 🌐 [LinkedIn](https://linkedin.com/in/harsh-pandey-395a10237) &nbsp;|&nbsp; 🐙 [GitHub](https://github.com/harshpandey97)
+
+⭐ If you found this repository helpful, don't forget to Star it!
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=16&pause=1500&color=888888&center=true&vCenter=true&width=500&lines=Learning+Never+Stops+%F0%9F%9A%80)](https://git.io/typing-svg)
+
+</div>
