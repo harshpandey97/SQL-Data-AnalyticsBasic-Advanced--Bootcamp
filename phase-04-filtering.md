@@ -1,346 +1,588 @@
-# Phase 3: Backup & Restore
+# Phase 4: Selection Commands – Filtering Data
 
-**Status:** ✅ Complete  
-**Source:** Tutedude SQL Course — Module 17 (29m 25s, 3 Lectures)
+**Status:** ✅ Complete
+**Source:** Tutedude SQL Course — Module 18 (26m 56s, 3 Lectures)
 
 ---
 
 # 🎯 Learning Objectives
 
-In this module, I learned how to create database backups and restore databases in Microsoft SQL Server. These operations are essential for protecting data, recovering from failures, and ensuring business continuity.
+In this module, I learned how to retrieve specific records from a database using SQL filtering techniques. Filtering allows us to extract only the required data based on conditions, making it one of the most important concepts for data analysis and reporting.
 
-Topics Covered:
+**Topics Covered:**
 
-- Database Backup
-- Database Restore
-- Backup (.bak) Files
-- Disaster Recovery Basics
+* WHERE Clause
+* Comparison Operators
+* Logical Operators (AND, OR, NOT)
+* BETWEEN
+* IN
+* LIKE
+* IS NULL
 
 ---
 
 # 📖 Notes
 
-## What is a Database Backup?
+## What is Filtering?
 
-A **database backup** is a copy of a database that can be used to restore data if the original database becomes damaged, corrupted, or accidentally deleted.
+Filtering is the process of retrieving only those records that satisfy one or more specified conditions.
 
-Backups are an essential part of database administration and help organizations recover from unexpected failures.
-
-### Why are Backups Important?
-
-- Protect against accidental deletion
-- Recover from hardware failures
-- Recover after software crashes
-- Restore databases after cyberattacks
-- Maintain business continuity
-- Support disaster recovery plans
-
----
-
-# Types of SQL Server Backups
-
-## 1. Full Backup
-
-A **Full Backup** copies the entire database, including:
-
-- Tables
-- Stored Procedures
-- Views
-- Indexes
-- User Data
-- Database Objects
-
-### Advantages
-
-- Easy to restore
-- Complete copy of the database
-- Recommended before major updates
-
-### Disadvantages
-
-- Takes more storage space
-- Backup process may take longer for large databases
-
----
-
-## 2. Differential Backup
-
-A Differential Backup stores only the changes made since the last Full Backup.
-
-### Advantages
-
-- Faster than Full Backup
-- Requires less storage
-- Faster recovery compared to multiple transaction log backups
-
----
-
-## 3. Transaction Log Backup
-
-A Transaction Log Backup records every transaction made since the previous log backup.
-
-Used primarily in production environments for:
-
-- Point-in-time recovery
-- Minimal data loss
-- High availability
-
----
-
-# Backup File (.bak)
-
-A **.bak** file is the default backup file created by SQL Server.
-
-It contains:
-
-- Database schema
-- Tables
-- Records
-- Stored Procedures
-- Views
-- Functions
-- Security information
+Instead of displaying every row in a table, SQL uses filtering conditions to return only relevant data.
 
 Example:
 
-```
-CompanyDB.bak
-```
+Suppose an `Employees` table contains 10,000 records. If we only need employees from the IT department, filtering helps retrieve only those records instead of the entire table.
 
 ---
 
-# Creating a Backup (Using SQL Server)
+# 1. WHERE Clause
 
-## Syntax
+The `WHERE` clause is used to filter records based on one or more conditions.
+
+### Syntax
 
 ```sql
-BACKUP DATABASE DatabaseName
-TO DISK = 'C:\Backup\DatabaseName.bak';
+SELECT column_name
+FROM table_name
+WHERE condition;
 ```
 
 ### Example
 
 ```sql
-BACKUP DATABASE CompanyDB
-TO DISK = 'C:\SQLBackups\CompanyDB.bak';
+SELECT *
+FROM Employees
+WHERE Department = 'IT';
+```
+
+### Key Points
+
+* Returns only matching records.
+* Can be used with comparison, logical, and special operators.
+* Frequently used with `SELECT`, `UPDATE`, and `DELETE`.
+
+---
+
+# 2. Comparison Operators
+
+Comparison operators compare values and return rows that satisfy the condition.
+
+| Operator | Meaning                  |
+| -------- | ------------------------ |
+| =        | Equal to                 |
+| <> or != | Not equal to             |
+| >        | Greater than             |
+| <        | Less than                |
+| >=       | Greater than or equal to |
+| <=       | Less than or equal to    |
+
+### Examples
+
+Equal To
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department = 'HR';
+```
+
+Greater Than
+
+```sql
+SELECT *
+FROM Employees
+WHERE Salary > 60000;
+```
+
+Less Than
+
+```sql
+SELECT *
+FROM Employees
+WHERE Age < 30;
+```
+
+Not Equal To
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department <> 'Sales';
 ```
 
 ---
 
-# Restoring a Database
+# 3. Logical Operators
 
-A database can be restored using a previously created backup file.
+Logical operators combine multiple conditions.
 
-## Syntax
+---
+
+## AND Operator
+
+Returns records only if **all conditions** are true.
+
+### Syntax
 
 ```sql
-RESTORE DATABASE DatabaseName
-FROM DISK = 'C:\Backup\DatabaseName.bak';
+SELECT *
+FROM Employees
+WHERE condition1 AND condition2;
 ```
 
 ### Example
 
 ```sql
-RESTORE DATABASE CompanyDB
-FROM DISK = 'C:\SQLBackups\CompanyDB.bak';
+SELECT *
+FROM Employees
+WHERE Department = 'IT'
+AND Salary > 60000;
 ```
 
 ---
 
-# Backup Using SQL Server Management Studio (SSMS)
+## OR Operator
 
-1. Open SQL Server Management Studio.
-2. Expand the **Databases** folder.
-3. Right-click the database.
-4. Select **Tasks → Back Up**.
-5. Choose **Full Backup**.
-6. Select the destination folder.
-7. Click **OK**.
+Returns records if **any one condition** is true.
 
-SQL Server generates a **.bak** file.
+### Example
 
----
-
-# Restore Using SSMS
-
-1. Right-click **Databases**.
-2. Select **Restore Database**.
-3. Choose **Device**.
-4. Browse and select the **.bak** file.
-5. Click **OK**.
-6. SQL Server restores the database.
+```sql
+SELECT *
+FROM Employees
+WHERE Department = 'HR'
+OR Department = 'Finance';
+```
 
 ---
 
-# Disaster Recovery
+## NOT Operator
 
-Disaster Recovery (DR) refers to the process of recovering a database after unexpected failures.
+Returns records that do **not** satisfy the condition.
 
-Common causes include:
+### Example
 
-- Hardware failure
-- Power outage
-- Human error
-- Malware or ransomware attacks
-- Disk corruption
-- Natural disasters
-
-A disaster recovery strategy helps minimize downtime and data loss.
+```sql
+SELECT *
+FROM Employees
+WHERE NOT Department = 'Sales';
+```
 
 ---
 
-# Recovery Strategy
+# 4. BETWEEN Operator
 
-A common recovery strategy includes:
+`BETWEEN` selects values within a specified range.
 
-- Regular Full Backups
-- Daily Differential Backups
-- Frequent Transaction Log Backups
-- Testing backup files regularly
-- Storing backups in multiple locations
-- Automating backup schedules
+It includes both the starting and ending values.
+
+### Syntax
+
+```sql
+SELECT *
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+```
+
+### Example
+
+```sql
+SELECT *
+FROM Employees
+WHERE Salary BETWEEN 40000 AND 70000;
+```
+
+Date Example
+
+```sql
+SELECT *
+FROM Employees
+WHERE HireDate
+BETWEEN '2022-01-01'
+AND '2024-12-31';
+```
+
+---
+
+# 5. IN Operator
+
+The `IN` operator allows multiple values in a single condition.
+
+Instead of writing multiple OR conditions, use `IN`.
+
+### Syntax
+
+```sql
+SELECT *
+FROM table_name
+WHERE column_name IN (value1, value2, value3);
+```
+
+### Example
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department IN ('HR','IT','Finance');
+```
+
+Equivalent Query
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department='HR'
+OR Department='IT'
+OR Department='Finance';
+```
+
+---
+
+# 6. LIKE Operator
+
+`LIKE` searches for patterns in text data.
+
+### Wildcards
+
+| Wildcard | Meaning                 |
+| -------- | ----------------------- |
+| %        | Zero or more characters |
+| _        | Single character        |
+
+---
+
+### Starts With
+
+```sql
+SELECT *
+FROM Employees
+WHERE FirstName LIKE 'A%';
+```
+
+Example Results
+
+* Alice
+* Amit
+* Andrew
+
+---
+
+### Ends With
+
+```sql
+SELECT *
+FROM Employees
+WHERE FirstName LIKE '%n';
+```
+
+---
+
+### Contains
+
+```sql
+SELECT *
+FROM Employees
+WHERE FirstName LIKE '%ar%';
+```
+
+---
+
+### Single Character
+
+```sql
+SELECT *
+FROM Employees
+WHERE FirstName LIKE '_a%';
+```
+
+Matches
+
+* Rahul
+* Manish
+
+---
+
+# 7. IS NULL
+
+NULL represents missing or unknown values.
+
+To check NULL values, use `IS NULL`.
+
+### Syntax
+
+```sql
+SELECT *
+FROM table_name
+WHERE column_name IS NULL;
+```
+
+### Example
+
+```sql
+SELECT *
+FROM Employees
+WHERE ManagerID IS NULL;
+```
+
+---
+
+## IS NOT NULL
+
+```sql
+SELECT *
+FROM Employees
+WHERE Email IS NOT NULL;
+```
+
+---
+
+# Order of Execution
+
+SQL evaluates conditions in the following order:
+
+1. FROM
+2. WHERE
+3. SELECT
+
+Filtering happens before displaying the final output.
 
 ---
 
 # Best Practices
 
-- Schedule regular backups.
-- Store backups on separate storage devices.
-- Verify backup files periodically.
-- Keep multiple backup versions.
-- Encrypt sensitive backups.
-- Test restore procedures regularly.
-- Document backup schedules and retention policies.
+* Always use `WHERE` when retrieving specific data.
+* Prefer `IN` instead of multiple `OR` conditions.
+* Use `BETWEEN` for ranges.
+* Use `LIKE` for searching text patterns.
+* Use `IS NULL` instead of `= NULL`.
+* Keep filtering conditions simple and readable.
 
 ---
 
 # 💻 Query Examples
 
-## Create a Full Backup
+Create Sample Table
 
 ```sql
-BACKUP DATABASE CompanyDB
-TO DISK = 'C:\SQLBackups\CompanyDB.bak';
+CREATE TABLE Employees
+(
+EmployeeID INT,
+EmployeeName VARCHAR(100),
+Department VARCHAR(50),
+Salary DECIMAL(10,2),
+Age INT,
+City VARCHAR(50),
+Email VARCHAR(100)
+);
 ```
 
 ---
 
-## Restore a Database
+Employees in IT Department
 
 ```sql
-RESTORE DATABASE CompanyDB
-FROM DISK = 'C:\SQLBackups\CompanyDB.bak';
+SELECT *
+FROM Employees
+WHERE Department='IT';
 ```
 
 ---
 
-## Backup With Initialization
-
-Overwrites an existing backup file.
+Salary Greater Than 50000
 
 ```sql
-BACKUP DATABASE CompanyDB
-TO DISK = 'C:\SQLBackups\CompanyDB.bak'
-WITH INIT;
+SELECT *
+FROM Employees
+WHERE Salary > 50000;
 ```
 
 ---
 
-## Verify a Backup File
-
-Checks whether the backup file is valid.
+Age Less Than 30
 
 ```sql
-RESTORE VERIFYONLY
-FROM DISK = 'C:\SQLBackups\CompanyDB.bak';
+SELECT *
+FROM Employees
+WHERE Age < 30;
+```
+
+---
+
+IT Employees with Salary Above 60000
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department='IT'
+AND Salary > 60000;
+```
+
+---
+
+HR or Finance Employees
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department='HR'
+OR Department='Finance';
+```
+
+---
+
+Employees Between 25 and 35 Years
+
+```sql
+SELECT *
+FROM Employees
+WHERE Age BETWEEN 25 AND 35;
+```
+
+---
+
+Departments Using IN
+
+```sql
+SELECT *
+FROM Employees
+WHERE Department IN
+('IT','Finance','HR');
+```
+
+---
+
+Names Starting with A
+
+```sql
+SELECT *
+FROM Employees
+WHERE EmployeeName LIKE 'A%';
+```
+
+---
+
+Names Ending with N
+
+```sql
+SELECT *
+FROM Employees
+WHERE EmployeeName LIKE '%N';
+```
+
+---
+
+Employees Without Email
+
+```sql
+SELECT *
+FROM Employees
+WHERE Email IS NULL;
+```
+
+---
+
+Employees With Email
+
+```sql
+SELECT *
+FROM Employees
+WHERE Email IS NOT NULL;
 ```
 
 ---
 
 # ⚠️ Common Mistakes (Gotchas)
 
-- Forgetting to create backups before major updates.
-- Saving backups on the same drive as the database.
-- Never testing restore procedures.
-- Accidentally overwriting important backup files.
-- Ignoring backup verification.
-- Not maintaining multiple backup copies.
-- Failing to automate backup schedules.
+* Forgetting the `WHERE` clause in `UPDATE` or `DELETE` statements.
+* Using `= NULL` instead of `IS NULL`.
+* Confusing `%` and `_` wildcards.
+* Using multiple `OR` conditions instead of `IN`.
+* Reversing the range in `BETWEEN`.
+* Forgetting quotation marks around text values.
+* Incorrect use of logical operators leading to unexpected results.
 
 ---
 
 # 🧠 Interview Questions
 
-### What is a database backup?
+### What is the purpose of the WHERE clause?
 
-A database backup is a copy of the database used to restore data in case of failure, corruption, or accidental deletion.
-
----
-
-### What is a .bak file?
-
-A **.bak** file is the backup file generated by Microsoft SQL Server that contains the database and its objects.
+The `WHERE` clause filters records and returns only rows that satisfy a specified condition.
 
 ---
 
-### What is the difference between Backup and Restore?
+### Difference between WHERE and HAVING?
 
-| Backup | Restore |
-|----------|----------|
-| Creates a copy of the database | Recovers a database from a backup |
-| Prevents data loss | Restores lost or damaged data |
-| Creates a `.bak` file | Uses a `.bak` file |
-
----
-
-### Why should backups be stored separately?
-
-If the storage device containing the database fails, backups stored on the same device may also be lost. Storing backups separately improves disaster recovery.
+| WHERE                        | HAVING                                |
+| ---------------------------- | ------------------------------------- |
+| Filters rows before grouping | Filters grouped data after `GROUP BY` |
+| Works on individual records  | Works on aggregated results           |
 
 ---
 
-### What is Disaster Recovery?
+### Difference between IN and OR?
 
-Disaster Recovery is the process of restoring systems and databases after unexpected failures to minimize downtime and data loss.
+`IN` is a concise way to compare a column with multiple values, while `OR` requires separate conditions for each value.
+
+---
+
+### Difference between LIKE and = ?
+
+| LIKE                       | =                    |
+| -------------------------- | -------------------- |
+| Searches patterns          | Matches exact values |
+| Uses `%` and `_` wildcards | No wildcard support  |
+
+---
+
+### Difference between NULL and 0?
+
+| NULL                     | 0                  |
+| ------------------------ | ------------------ |
+| Unknown or missing value | Numeric value      |
+| Checked using `IS NULL`  | Compared using `=` |
 
 ---
 
 # 🔑 Key Takeaways
 
-- Learned the importance of database backups.
-- Understood different types of SQL Server backups.
-- Learned how to create Full Backups.
-- Learned how to restore databases using backup files.
-- Understood the purpose of `.bak` files.
-- Learned disaster recovery fundamentals.
-- Explored backup best practices for real-world environments.
+* Learned how to filter data using the `WHERE` clause.
+* Used comparison operators to retrieve matching records.
+* Combined conditions with `AND`, `OR`, and `NOT`.
+* Filtered ranges using `BETWEEN`.
+* Simplified multiple-value searches using `IN`.
+* Searched text patterns with `LIKE`.
+* Handled missing values using `IS NULL` and `IS NOT NULL`.
+* Practiced writing efficient and readable filtering queries.
 
 ---
 
 # 📚 Summary
 
-| Topic | Covered |
-|--------|----------|
-| Full Backup | ✅ |
-| Differential Backup | ✅ |
-| Transaction Log Backup | ✅ |
-| Restore Database | ✅ |
-| .bak Files | ✅ |
-| Disaster Recovery | ✅ |
-| Backup Verification | ✅ |
-| Best Practices | ✅ |
+| Topic                    | Covered |
+| ------------------------ | ------- |
+| WHERE Clause             | ✅       |
+| Comparison Operators     | ✅       |
+| Logical Operators        | ✅       |
+| BETWEEN                  | ✅       |
+| IN                       | ✅       |
+| LIKE                     | ✅       |
+| IS NULL                  | ✅       |
+| Pattern Matching         | ✅       |
+| Filtering Best Practices | ✅       |
 
 ---
 
 # 🔗 Resources
 
-- 📘 Tutedude SQL Course — Module 17 (29m 25s, 3 Lectures)
-- 📖 Microsoft SQL Server Documentation
-- 📖 SQL Server Backup & Restore Guide
-- 📖 SQL Server Disaster Recovery Documentation
-- 📖 W3Schools SQL Tutorial
+* 📘 Tutedude SQL Course — Module 18 (26m 56s, 3 Lectures)
+* 📖 Microsoft SQL Server Documentation
+* 📖 SQLBolt – Filtering Data
+* 📖 W3Schools SQL WHERE Clause
+* 📖 PostgreSQL Documentation
+* 📖 MySQL Documentation
 
 ---
 
-> **Completion Status:** ✅ Phase 3 Completed Successfully  
-> **Next Phase:** Database Relationships, Keys & Normalization
+> **Completion Status:** ✅ Phase 4 Completed Successfully
+> **Next Phase:** Sorting Data (`ORDER BY`), Limiting Results (`TOP`, `LIMIT`) and Aggregate Functions (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`)
